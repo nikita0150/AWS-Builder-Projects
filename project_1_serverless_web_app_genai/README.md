@@ -1,85 +1,75 @@
-# 🤖 Serverless Generative AI Web Application on AWS
+# React + TypeScript + Vite
 
-A serverless Generative AI web application built using AWS Amplify, Amazon Cognito, AWS AppSync, AWS Lambda, and Amazon Bedrock.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-The application allows users to enter a list of ingredients and generates AI-powered recipe suggestions using a foundation model available through Amazon Bedrock.
+Currently, two official plugins are available:
 
----
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## 🚀 Project Overview
+## React Compiler
 
-This project demonstrates how to build and deploy a complete serverless Generative AI application on AWS without managing traditional servers.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-The application consists of:
+## Expanding the ESLint configuration
 
-- A web frontend hosted using AWS Amplify
-- User authentication using Amazon Cognito
-- A GraphQL API using AWS AppSync
-- Serverless backend processing using AWS Lambda
-- Generative AI inference using Amazon Bedrock
-- Continuous deployment through AWS Amplify and GitHub
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-The project is based on the AWS hands-on tutorial:
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-[AWS - Build a Serverless Web Application using Generative AI](https://docs.aws.amazon.com/hands-on/latest/build-serverless-web-app-lambda-amplify-bedrock-cognito-gen-ai/build-serverless-web-app-lambda-amplify-bedrock-cognito-gen-ai.html)
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
----
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 
-## 🏗️ Architecture
+```
 
-```text
-                         ┌──────────────────────┐
-                         │        User          │
-                         │   Web Browser        │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │    AWS Amplify       │
-                         │  Frontend Hosting    │
-                         └──────────┬───────────┘
-                                    │
-                                    │ Authentication
-                                    ▼
-                         ┌──────────────────────┐
-                         │   Amazon Cognito     │
-                         │   User Authentication│
-                         └──────────────────────┘
+You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
 
-                                    │
-                                    │ API Request
-                                    ▼
-                         ┌──────────────────────┐
-                         │     AWS AppSync      │
-                         │    GraphQL API       │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │     AWS Lambda       │
-                         │  Serverless Backend  │
-                         └──────────┬───────────┘
-                                    │
-                                    │ Prompt
-                                    ▼
-                         ┌──────────────────────┐
-                         │   Amazon Bedrock     │
-                         │ Generative AI Model  │
-                         └──────────┬───────────┘
-                                    │
-                                    │ AI Response
-                                    ▼
-                         ┌──────────────────────┐
-                         │      Lambda          │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │      AppSync         │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │      Amplify         │
-                         │      Frontend        │
-                         └──────────────────────┘
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
+```
