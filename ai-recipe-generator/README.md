@@ -9,31 +9,31 @@ Built to understand how AWS managed services can be combined into a secure, scal
 ## 🏗️ Architecture
 
 ```text
-User
-  │
-  ▼
-AWS Amplify Hosting
-  │
-  ▼
-React + TypeScript
-  │
-  ▼
-Amazon Cognito
-(Authentication)
-  │
-  ▼
-AWS AppSync
-(GraphQL API)
-  │
-  ▼
-Bedrock HTTP Data Source
-  │
-  ▼
-Amazon Bedrock
-(Nova Lite)
-  │
-  ▼
-AI Generated Recipe
+                                                          User
+                                                            │
+                                                            ▼
+                                                          AWS Amplify Hosting
+                                                            │
+                                                            ▼
+                                                          React + TypeScript
+                                                            │
+                                                            ▼
+                                                          Amazon Cognito
+                                                          (Authentication)
+                                                            │
+                                                            ▼
+                                                          AWS AppSync
+                                                          (GraphQL API)
+                                                            │
+                                                            ▼
+                                                          Bedrock HTTP Data Source
+                                                            │
+                                                            ▼
+                                                          Amazon Bedrock
+                                                          (Nova Lite)
+                                                            │
+                                                            ▼
+                                                          AI Generated Recipe
 ```
 
 ---
