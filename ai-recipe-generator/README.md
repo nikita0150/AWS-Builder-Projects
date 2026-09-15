@@ -1,75 +1,127 @@
-# React + TypeScript + Vite
+# 🤖 AI Recipe Generator — AWS Serverless GenAI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A serverless GenAI application that generates recipes from user-provided ingredients using **Amazon Bedrock (Nova Lite)**.
 
-Currently, two official plugins are available:
+Built to understand how AWS managed services can be combined into a secure, scalable, and CI/CD-driven application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🏗️ Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+User
+  │
+  ▼
+AWS Amplify Hosting
+  │
+  ▼
+React + TypeScript
+  │
+  ▼
+Amazon Cognito
+(Authentication)
+  │
+  ▼
+AWS AppSync
+(GraphQL API)
+  │
+  ▼
+Bedrock HTTP Data Source
+  │
+  ▼
+Amazon Bedrock
+(Nova Lite)
+  │
+  ▼
+AI Generated Recipe
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ☁️ AWS Services
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Service             | Purpose                        |
+| ------------------- | ------------------------------ |
+| **Amplify Hosting** | Frontend hosting + CI/CD       |
+| **Amplify Gen 2**   | Backend Infrastructure as Code |
+| **Cognito**         | User authentication            |
+| **AppSync**         | GraphQL API                    |
+| **Bedrock**         | GenAI inference                |
+| **Nova Lite**       | Foundation model               |
+| **IAM**             | Least-privilege access         |
 
+---
+
+## 🔧 What I Learned
+
+### Cloud & Architecture
+
+* Designed a **serverless AWS architecture**
+* Understood frontend → API → AI service communication
+* Learned how managed AWS services reduce infrastructure management
+
+### DevOps
+
+* Git-based deployment using **AWS Amplify Hosting**
+* Monorepo deployment configuration
+* Backend provisioning through **Infrastructure as Code**
+* Understanding of build/deployment pipelines
+* Troubleshooting AWS deployment and dependency issues
+
+### Security
+
+* Implemented authentication using **Amazon Cognito**
+* Protected API operations using authenticated authorization
+* Applied **least-privilege IAM** for Bedrock model invocation
+* Kept AWS service access away from the frontend
+
+### GenAI
+
+* Integrated **Amazon Bedrock**
+* Used **Amazon Nova Lite**
+* Learned how applications communicate with foundation models through managed APIs
+
+---
+
+## 🚀 Production-Grade Evolution
+
+For a production implementation, this architecture could be extended with:
+
+```text
+                    ┌──────────────┐
+                    │     WAF      │
+                    └──────┬───────┘
+                           │
+User → CDN/Amplify → Cognito → AppSync → Bedrock
+                                      │
+                                      ▼
+                              Observability
+                         CloudWatch / OpenTelemetry
 ```
+
+Potential production improvements:
+
+* Separate **Dev / Test / Prod** environments
+* Automated CI/CD with testing and quality gates
+* CloudWatch monitoring, logs and alarms
+* AWS WAF and API throttling
+* Custom domain + Route 53
+* Centralized secrets/configuration management
+* Cost monitoring and Bedrock usage controls
+* RAG using **Bedrock Knowledge Bases**
+* DynamoDB for recipe/history persistence
+
+---
+
+## 💡 Key Takeaway
+
+This project demonstrates how to build a **secure, serverless GenAI application on AWS** while applying core Cloud/DevOps principles such as **IaC, CI/CD, IAM, authentication, managed services, scalability, and observability**.
+
+---
+
+## 🛠️ Tech Stack
+
+**AWS:** Amplify • Cognito • AppSync • Bedrock • IAM
+**Development:** React • TypeScript • Vite
+**DevOps:** Git • GitHub • CI/CD • Infrastructure as Code
+**AI:** Amazon Nova Lite
