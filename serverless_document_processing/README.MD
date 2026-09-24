@@ -6,7 +6,7 @@ The project simulates a system where a user uploads a document to S3. Instead of
 
 ## Architecture
 
-
+![Serverless Asynchronous Document Processing Architecture](./png/serverless_document_processing.png)
 
 ## AWS Services
 
