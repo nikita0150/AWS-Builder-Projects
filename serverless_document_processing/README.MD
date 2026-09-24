@@ -5,9 +5,8 @@ A hands-on AWS POC demonstrating **event-driven and asynchronous document proces
 The project simulates a system where a user uploads a document to S3. Instead of processing the document synchronously, S3 sends an event to SQS. Lambda consumes the message, downloads the document, extracts its text, and stores the extracted content and metadata in DynamoDB.
 
 ## Architecture
-
-![Serverless Asynchronous Document Processing Architecture](./png/serverless_document_processing.png)
-
+User │ │ Upload Document ▼ Amazon S3 │ │ S3 Event Notification ▼ Amazon SQS │ │ Message ▼ AWS Lambda │ ├── Read SQS message ├── Get document from S3 ├── Extract text └── Store result │ ▼ Amazon DynamoDB Failed messages │ ▼ SQS DLQ Monitoring │ ▼ CloudWatch
+  
 ## AWS Services
 
 * **Amazon S3** – Stores uploaded documents
