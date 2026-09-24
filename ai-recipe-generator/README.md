@@ -7,35 +7,7 @@ Built to understand how AWS managed services can be combined into a secure, scal
 ---
 
 ## 🏗️ Architecture
-
-```text
-                                                          User
-                                                            │
-                                                            ▼
-                                                          AWS Amplify Hosting
-                                                            │
-                                                            ▼
-                                                          React + TypeScript
-                                                            │
-                                                            ▼
-                                                          Amazon Cognito
-                                                          (Authentication)
-                                                            │
-                                                            ▼
-                                                          AWS AppSync
-                                                          (GraphQL API)
-                                                            │
-                                                            ▼
-                                                          Bedrock HTTP Data Source
-                                                            │
-                                                            ▼
-                                                          Amazon Bedrock
-                                                          (Nova Lite)
-                                                            │
-                                                            ▼
-                                                          AI Generated Recipe
-```
-
+<img width="1100" height="560" alt="recipe-architecture" src="https://github.com/user-attachments/assets/599862c8-416e-4566-bfe6-38e2f6cb62d1" />
 ---
 
 ## ☁️ AWS Services
